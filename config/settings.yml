@@ -1,0 +1,21 @@
+dynaconf_merge: '@bool True'
+DEV: '@bool True'
+
+development:
+  # Development Configuration
+
+  webapp:
+    DEBUG: '@bool True'
+    REMEMBER_TIME: '@int 2592000'
+    TIME_ZONE: '@str Europe/Moscow'
+    ROOT_MEDIA_DIR: '@str media'
+    ROOT_STATIC_DIR: '@str static'
+    ROOT_TEMPLATES_DIR: '@str templates'
+  postgresql:
+    host: '@str 127.0.0.1'
+
+release:
+  # Release configuration
+  
+  postgresql:
+    host: '@str 0.0.0.0'
