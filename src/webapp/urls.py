@@ -6,4 +6,5 @@ from src.webapp import views
 
 urlpatterns = [
     path('', views.index, name='home'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,33 @@
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <!-- Button Canvas Menu -->
+        <button
+                class="navbar-brand btn logo-text"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#canvasMenu"
+                aria-controls="canvasMenu">
+            MY MAY
+        </button>
+        <!-- END Button Canvas Menu -->
+
+        <!-- Toolbar -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="myTab" role="tablist">
+            <li class="nav-item"></li>
+        </ul>
+        <!-- Toolbar -->
+
+        <!-- Profile User -->
+        <div class="dropdown">
+            <button class="btn dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user me-1"></i>
+                {{ request.user.first_name }} {{ request.user.last_name }}
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#"></a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

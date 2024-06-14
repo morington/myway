@@ -21,8 +21,10 @@ DEBUG = config.get('webapp', {}).get('DEBUG')
 logger.debug('Reading settings...', debug_mode=DEBUG)
 
 #  HOSTS
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0', 'http://127.0.0.1', 'http://localhost']
+config_hosts = config.get('webapp', {}).get('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost'] + config_hosts
+CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0', 'http://127.0.0.1', 'http://localhost'] + [f'http://{host}' for host in config_hosts]
+logger.debug('Hosts', ALLOWED_HOSTS=ALLOWED_HOSTS, CSRF_TRUSTED_ORIGINS=CSRF_TRUSTED_ORIGINS)
 
 #  STATICS
 STATIC_URL = '/static/'
@@ -33,11 +35,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / config.get('webapp', {}).get('ROOT_MEDIA_DIR')
 
 #  LANGUAGE
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'ru-ru'
 
 #  I18N
 TIME_ZONE = config.get('webapp', {}).get('TIME_ZONE', 'UTC')
-USE_I18N = False
+USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
 #  AUTH
@@ -57,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     'src.authentication.apps.AuthConfig',
     'src.webapp.apps.WebappConfig',

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="icon" href="{% static 'images/favicon.ico' %}">
+        <title>{{ title }}</title>
+
+        <!--BootStrap5.3.3-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!--Data Table-->
+        <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-html5-3.0.2/b-print-3.0.2/date-1.5.2/fh-4.0.1/sb-1.7.1/sl-2.0.3/sp-2.3.1/datatables.min.css" rel="stylesheet">
+        <!-- Google Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- Google Font Nunito -->
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+        <!-- Google Font Shantell Sans -->
+        <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+        <!-- Material Symbol -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <!-- Local CSS -->
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+        <!-- Additional Head -->
+        {% block head %}{% endblock %}
+        <!-- END Additional Head -->
+    </head>
+    <body>
+        <!-- Global Header -->
+        {% include "header.html" %}
+        <!-- END Global Header -->
+
+        <!-- Canvas Menu -->
+        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="canvasMenu" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+                    <i class="fa-solid fa-bars me-2"></i>
+                    Меню
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <!-- Body Menu -->
+                <div class="list-group list-group-flush">
+                    <!-- home -->
+                    <a href="{% url 'home' %}"
+                            class="list-group-item list-group-item-action {% if home %}active shadow p-3 m-1 rounded{% endif %} border-0"
+                            aria-current="true">
+                        <!-- Name Link -->
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">
+                                <i class="fa-solid fa-house"></i>
+                                Главная
+                            </h5>
+                        </div>
+                        <!-- Description Link -->
+                        <small>Начальная страница</small>
+                    </a>
+
+
+                </div>
+                <!-- END Body Menu -->
+            </div>
+        </div>
+        <!-- END Canvas Menu -->
+
+        <!-- Content -->
+        <div class="px-3">
+            {% block content %}{% endblock %}
+        </div>
+        <!-- END Content -->
+    </body>
+    <!-- Data Table -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-html5-3.0.2/b-print-3.0.2/date-1.5.2/fh-4.0.1/sb-1.7.1/sl-2.0.3/sp-2.3.1/datatables.min.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/6f99fa9721.js" crossorigin="anonymous"></script>
+    <!-- BootStrap5.3.3 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Highcharts -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <!-- Local Script -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+    <!-- Additional Basement -->
+    {% block basement %}{% endblock %}
+    <!-- END Additional Basement -->
+
+    <!-- Demanding scripts -->
+    <script src="{% static 'js/demanding_scripts.js' %}"></script>
+</html>
