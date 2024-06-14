@@ -1,0 +1,145 @@
+{% load filters %}
+<div class="mt-xs-5">
+    <div class="row justify-content-center">
+        <div class="col-md-auto col-xs-6 my-2">
+            <div class="card" style="min-width: 10rem; max-width: 20rem;">
+                <div class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <i class="fa-solid fa-sack-dollar me-1"></i>
+                            Доходы
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Ваши ежемесячные доходы, включая заработную плату, бонусы и другие поступления.">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-3 py-2">
+                    {% if income.trend_direction is not None %}
+                        <small class="card-subtitle badge {% if income.trend_direction %}text-success{% else %}text-danger{% endif %}">
+                            <i class="fa-solid fa-scale-balanced me-1"></i>
+                            {% if income.trend_direction %}+{% else %}-{% endif %}{{ income.balance|monetary_format }}₽
+                        </small>
+                    {% endif %}
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <h4 class="card-title fw-bold">{{ income.value|default:0|monetary_format }}₽</h4>
+                        </div>
+                        <div class="col-auto">
+                            {% if income.trend_direction is not None %}
+                                <small class="{% if income.trend_direction %}text-success{% else %}text-danger{% endif %}">{% if income.trend_direction %}+{% endif %}{{ income.percent|default:0 }}%</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-auto col-xs-2 my-2">
+            <div class="card" style="min-width: 10rem; max-width: 20rem;">
+                <div class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <i class="fa-solid fa-comments-dollar me-1"></i>
+                            Расходы
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Ваши ежемесячные расходы, включая оплату счетов, покупки и другие затраты.">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-6 py-2">
+                    {% if expenses.trend_direction is not None %}
+                        <small class="card-subtitle badge {% if expenses.trend_direction %}text-success{% else %}text-danger{% endif %}">
+                            <i class="fa-solid fa-scale-balanced me-1"></i>
+                            {% if expenses.trend_direction %}+{% else %}-{% endif %}{{ expenses.balance|monetary_format }}₽
+                        </small>
+                    {% endif %}
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <h4 class="card-title fw-bold">{{ expenses.value|default:0|monetary_format }}₽</h4>
+                        </div>
+                        <div class="col-auto">
+                            {% if expenses.trend_direction is not None %}
+                                <small class="{% if expenses.trend_direction %}text-success{% else %}text-danger{% endif %}">{% if expenses.trend_direction %}+{% endif %}{{ expenses.percent|default:0 }}%</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-auto col-xs-6 my-2">
+            <div class="card" style="min-width: 10rem; max-width: 20rem;">
+                <div class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <i class="fa-solid fa-landmark me-1"></i>
+                            Вложения
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Ваши инвестиции, включая акции, облигации и другие активы.">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-3 py-2">
+                    {% if deposits.trend_direction is not None %}
+                        <small class="card-subtitle badge {% if deposits.trend_direction %}text-success{% else %}text-danger{% endif %}">
+                            <i class="fa-solid fa-scale-balanced me-1"></i>
+                            {% if deposits.trend_direction %}+{% else %}-{% endif %}{{ deposits.balance|monetary_format }}₽
+                        </small>
+                    {% endif %}
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <h4 class="card-title fw-bold">{{ deposits.value|default:0|monetary_format }}₽</h4>
+                        </div>
+                        <div class="col-auto">
+                            {% if deposits.trend_direction is not None %}
+                                <small class="{% if deposits.trend_direction %}text-success{% else %}text-danger{% endif %}">{% if income.trend_direction %}+{% endif %}{{ deposits.percent|default:0 }}%</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-auto col-xs-6 my-2">
+            <div class="card" style="min-width: 10rem; max-width: 20rem;">
+                <div class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <i class="fa-solid fa-coins me-1"></i>
+                            Накопления
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="top"
+                               data-bs-title="Ваши накопленные средства, включая сбережения и депозиты.">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-3 py-2">
+                    {% if savings.trend_direction is not None %}
+                        <small class="card-subtitle badge {% if savings.trend_direction %}text-success{% else %}text-danger{% endif %}">
+                            <i class="fa-solid fa-scale-balanced me-1"></i>
+                            {% if savings.trend_direction %}+{% else %}-{% endif %}{{ savings.balance|monetary_format }}₽
+                        </small>
+                    {% endif %}
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <h4 class="card-title fw-bold">{{ savings.value|default:0|monetary_format }}₽</h4>
+                        </div>
+                        <div class="col-auto">
+                            {% if savings.trend_direction is not None %}
+                                <small class="{% if savings.trend_direction %}text-success{% else %}text-danger{% endif %}">{% if savings.trend_direction %}+{% endif %}{{ savings.percent|default:0 }}%</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
