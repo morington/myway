@@ -3,10 +3,171 @@
 
 {% block content %}
     {% include 'dashboard.html' %}
-
+    <div class="mt-xs-5">
+        <div class="row justify-content-center">
+            <div class="col-auto my-2">
+                <div class="card">
+                    <h5 class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                        <i class="fa-solid fa-sack-dollar me-1"></i>
+                        Жизненные расходы
+                    </h5>
+                    <div class="card-body">
+                        <figure class="highcharts-figure">
+                            <div class="diagram-container" id="living-expenses" style="height: 300px;"></div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto my-2">
+                <div class="card">
+                    <h5 class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                        <i class="fa-solid fa-sack-dollar me-1"></i>
+                        Личное благосостояние
+                    </h5>
+                    <div class="card-body">
+                        <figure class="highcharts-figure">
+                            <div class="diagram-container" id="personal-wellbeing" style="height: 300px;"></div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto my-2">
+                <div class="card">
+                    <h5 class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                        <i class="fa-solid fa-sack-dollar me-1"></i>
+                        Образование и развитие
+                    </h5>
+                    <div class="card-body">
+                        <figure class="highcharts-figure">
+                            <div class="diagram-container" id="education-development" style="height: 300px;"></div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto my-2">
+                <div class="card">
+                    <h5 class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                        <i class="fa-solid fa-sack-dollar me-1"></i>
+                        Досуг и развлечения
+                    </h5>
+                    <div class="card-body">
+                        <figure class="highcharts-figure">
+                            <div class="diagram-container" id="leisure-entertainment" style="height: 300px;"></div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto my-2">
+                <div class="card">
+                    <h5 class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                        <i class="fa-solid fa-sack-dollar me-1"></i>
+                        Домашний быт и хозяйство
+                    </h5>
+                    <div class="card-body">
+                        <figure class="highcharts-figure">
+                            <div class="diagram-container" id="household-management" style="height: 300px;"></div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto my-2">
+                <div class="card">
+                    <h5 class="card-header fw-bold text-muted" style="font-size: 0.8rem;">
+                        <i class="fa-solid fa-sack-dollar me-1"></i>
+                        Финансовые обязательства и управление деньгами
+                    </h5>
+                    <div class="card-body">
+                        <figure class="highcharts-figure">
+                            <div class="diagram-container" id="financial-obligations" style="height: 300px;"></div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block basement %}
     <script>
+        function set_figure(idDiagram, dataDiagram) {
+            return Highcharts.chart(idDiagram, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    align: 'left',
+                    text: ''
+                },
+                accessibility: {
+                    announceNewData: {
+                        enabled: false
+                    }
+                },
+                xAxis: {
+                    type: ''
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    }
+
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}%'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: ' +
+                        '<b>{point.y:.2f}%</b> of total<br/>'
+                },
+
+                series: [
+                    {
+                        name: 'Browsers',
+                        colorByPoint: true,
+                        data: dataDiagram
+                    }
+                ],
+            });
+        }
+
+        data = [
+            {
+                name: 'Жилье',
+                y: 63.06
+            },
+            {
+                name: 'Продукты питания',
+                y: 19.84
+            },
+            {
+                name: 'Коммунальные услуги',
+                y: 4.18
+            },
+            {
+                name: 'Связь и интернет',
+                y: 4.12
+            }
+        ]
+        const livingExpensesHighcharts = set_figure('living-expenses', data);
+        const personalWellbeingHighcharts = set_figure('personal-wellbeing', data);
+        const educationDevelopmentHighcharts = set_figure('education-development', data);
+        const leisureEntertainmentHighcharts = set_figure('leisure-entertainment', data);
+        const householdManagementHighcharts = set_figure('household-management', data);
+        const financialObligationsHighcharts = set_figure('financial-obligations', data);
     </script>
 {% endblock %}
+
+
